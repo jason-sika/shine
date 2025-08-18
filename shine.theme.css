@@ -1,0 +1,17 @@
+/**
+ * @name Shine
+ * @description Glossy, glassy theme based on a twitter design.
+ * @author Blade0, Zeealeid
+ * @authorId 1124341362955919371
+ * @version 0
+ * @updateUrl https://blade04208.github.io/shine/shine.theme.css
+ * @source https://github.com/Blade04208/shine
+ * @invite KEcCnVuTV7
+ */
+
+ @import url(https://blade04208.github.io/shine/import.css);
+ 
+ :root {
+    --shine-gap: 8px;
+    --shine-radius: 12px;
+}
