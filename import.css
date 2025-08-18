@@ -1,3 +1,4 @@
+@import url(http://localhost:5050/dev.css);
 
 :root {
     --shine-gap: 8px;
@@ -93,7 +94,7 @@
     background: rgba(255, 255, 255, 0.04);
     background-blend-mode: plus-lighter;
     box-shadow: 0 -0.5px 1px 0 rgba(255, 255, 255, 0.15) inset, 0 0.5px 1px 0 rgba(255, 255, 255, 0.30) inset, 0 1px 2px 0 rgba(255, 255, 255, 0.20) inset, 0 2px 12px 0 rgba(0, 0, 0, 0.20) !important;
-    backdrop-filter: blur(16px) brightness(115%) saturate(150%) sepia(20%);
+    backdrop-filter: blur(8px) brightness(115%) saturate(150%) sepia(20%);
     border: 0px !important;
 }
 
@@ -169,21 +170,39 @@
     width: 52px;
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.0);
-    background-image: url(https://i.imgur.com/nOTQddj.png) !important;
+    background-image: url(https://blade04208.github.io/shine/src/marble.png) !important;
     background-size: 100%;
-    transition: all 0.1s;
+    transition: all 0.1s ease;
 
     &:not(.disabled__24af7) {
         border-radius: 99px;
-        background-image: url(https://i.imgur.com/B7RUXim.png) !important;
+        background-color: var(--brand-500);
+        background-image: url(https://blade04208.github.io/shine/src/marble-active.png) !important;
         background-size: 100%;
         box-shadow: 0px 0px 50px var(--brand-500);
+        transition: all 0.1s ease;
+
+        &:hover {
+            filter: brightness(110%);
+            box-shadow: 0px 0px 50px var(--brand-600);
+            scale: 1.1;
+        }
+
+        &:active {
+            scale: 0.95;
+            filter: brightness(80%);
+            box-shadow: 0px 0px 50px var(--brand-500);
+        }
     }
 
     .sendIcon_aa63ab {
         color: white !important;
         scale: 1.1;
     }
+}
+
+.scrollableContainer__74017:has(.container_aa63ab>.buttonContainer_aa63ab>.button_aa63ab:hover) {
+    overflow: visible !important;
 }
 
 .container__2637a {
@@ -207,7 +226,8 @@
 
 }
 
-.chat_f75fb0::after {
+.chat_f75fb0::after,
+.container__133bf::after {
     position: fixed;
     content: "";
     width: calc(var(--custom-guild-sidebar-width));
@@ -242,17 +262,19 @@
     z-index: 200;
     height: calc(100vh - var(--custom-app-top-bar-height)) !important;
     overflow: visible;
+}
 
-    &::after {
-        content: "";
-        position: fixed;
-        width: 20px;
-        height: 20px;
-        bottom: calc(var(--shine-gap) + 12px);
-        right: calc(var(--shine-gap) + 12px);
-        background: red;
-        z-index: 2000;
-    }
+#app-mount::after {
+    content: "";
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    bottom: calc(var(--shine-gap) + 12px);
+    right: calc(var(--shine-gap) + 12px);
+    /* background: red; */
+    background: url(https://blade04208.github.io/shine/src/grabber.svg) no-repeat center center;
+    z-index: 9999999;
+    -webkit-app-region: drag;
 }
 
 .buttons__37e49 {
@@ -272,10 +294,14 @@
         border-radius: 0px;
         padding: 2px;
         box-sizing: content-box;
-        backdrop-filter: blur(8px);
+        backdrop-filter: blur(2px);
 
         &:hover {
             background: rgba(255, 255, 255, 0.1)
+        }
+
+        &.redGlow__67645>.contents__201d5>.lottieIcon__5eb9b {
+            --__lottieIconColor: color-mix(in oklab, var(--status-danger), white 35%) !important;
         }
     }
 }
@@ -299,19 +325,23 @@
 }
 
 
-.containerDefault_c69b6d+.containerDefault__29444::before {
-    display: block;
-    position: absolute;
-    top: 0px;
-    content: "";
-    width: 100%;
-    height: 1px;
-    margin: 4px 8px;
-    align-items: flex-start;
-    gap: 10px;
-    align-self: stretch;
-    background: rgba(255, 255, 255, 0.08);
-    filter: drop-shadow(0 -1px 0 rgba(0, 0, 0, 0.25));
+.containerDefault_c69b6d+.containerDefault__29444 {
+    overflow: visible !important;
+
+    &::before {
+        display: block;
+        position: absolute;
+        top: 0px;
+        content: "";
+        width: 100%;
+        height: 1px;
+        margin: 4px 8px;
+        align-items: flex-start;
+        gap: 10px;
+        align-self: stretch;
+        background: rgba(255, 255, 255, 0.08);
+        box-shadow: 0 -1px rgb(0, 0, 0, 0.25);
+    }
 }
 
 a.link__2ea32 {
@@ -370,7 +400,8 @@ a.link__2ea32 {
     padding: 2px 6px;
     background: rgba(255, 255, 255, 0.05);
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.20), 0 -1.5px 0.4px -1px rgba(255, 255, 255, 0.15) inset, 0 1.5px 0.75px -1px rgba(255, 255, 255, 0.30) inset, 0 2px 12px 0 rgba(0, 0, 0, 0.20);
-    backdrop-filter: blur(16px);
+    backdrop-filter: blur(8px);
+    transition: all 0.3s;
 }
 
 .subtitleContainer_f75fb0 {
@@ -382,7 +413,7 @@ a.link__2ea32 {
         display: block;
         content: "";
         position: absolute;
-        background: rgba(0, 0, 0, 0.25);
+        background: color-mix(in oklab, var(--background-surface-high), transparent 75%);
         top: 0px;
         width: 100%;
         height: 150%;
@@ -395,7 +426,7 @@ a.link__2ea32 {
         display: block;
         content: "";
         position: absolute;
-        background: rgba(0, 0, 0, 0.025);
+        background: color-mix(in oklab, var(--background-surface-high), transparent 98.25%);
         top: 0px;
         width: 100%;
         height: 150%;
@@ -475,6 +506,10 @@ a.link__2ea32 {
     width: calc(100% - var(--custom-member-list-width));
 }
 
+.chat_f75fb0:has(.content_f75fb0 .user-profile-sidebar) .subtitleContainer_f75fb0 {
+    width: calc(100% - 340px);
+}
+
 .members_c8ffbb {
     border-left: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -490,4 +525,13 @@ a.link__2ea32 {
     width: fit-content;
     flex: 0;
     align-self: center !important;
+}
+
+
+.icon__9293f,
+.vc-toolbox-icon,
+.lottieIcon__5eb9b,
+.buttonWrapper__24af7>svg {
+    color: rgba(239, 232, 255, 0.863) !important;
+    filter: drop-shadow(0 -0.5px 1px 0 rgba(0, 0, 0, 0.12) inset) drop-shadow(0 1px 1px 0 rgba(255, 255, 255, 0.48) inset);
 }
