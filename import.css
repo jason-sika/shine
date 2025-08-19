@@ -1,6 +1,94 @@
+@property --shine-gap {
+    syntax: "<length>";
+    inherits: true;
+    initial-value: 8px;
+}
+
+@property --shine-radius {
+    syntax: "<length>";
+    inherits: true;
+    initial-value: 12px;
+}
+
+@property --shine-base {
+    syntax: "<color>";
+    inherits: true;
+    initial-value: #201b35;
+}
+
+@property --shine-fog {
+    syntax: "true | false | no-threads";
+    inherits: true;
+    initial-value: true;
+}
+
+@container style(--shine-base: default) {
+    #app-mount {
+        --custom-theme-base-color: #201b35;
+    }
+}
+
+@container style(--shine-fog: false) {
+
+    .panels_c48ade::after,
+    .form_f75fb0::after,
+    .chat_f75fb0::after,
+    .container__133bf::after,
+    .subtitleContainer_f75fb0::before,
+    .subtitleContainer_f75fb0::after {
+        display: none !important;
+    }
+
+    .panels_c48ade,
+    .form_f75fb0,
+    .container__133bf {
+        background: linear-gradient(to bottom, transparent, var(--background-base-lowest)) !important;
+    }
+
+    .subtitleContainer_f75fb0 {
+        background: linear-gradient(to top, transparent, var(--background-base-lowest)) !important;
+    }
+}
+
+@container style(--shine-fog: no-threads) {
+    .chatLayerWrapper__01ae2 {
+
+        .panels_c48ade::after,
+        .form_f75fb0::after,
+        .chat_f75fb0::after,
+        .container__133bf::after,
+        .subtitleContainer_f75fb0::before,
+        .subtitleContainer_f75fb0::after {
+            display: none !important;
+        }
+
+        .panels_c48ade,
+        .form_f75fb0,
+        .container__133bf {
+            background: linear-gradient(to bottom, transparent, var(--background-base-lowest)) !important;
+        }
+
+        .subtitleContainer_f75fb0 {
+            background: linear-gradient(to top, transparent, var(--background-base-lowest)) !important;
+        }
+    }
+}
+
 :root {
     --shine-gap: 8px;
     --shine-radius: 12px;
+    --shine-base: default;
+    --shine-fog: no-threads;
+}
+
+
+.animatedBannerHoverLayer_f37cb1,
+div[style="height: 84px;"][aria-hidden="true"] {
+    display: none;
+}
+
+.hasBanner_f37cb1.bannerVisible_f37cb1 {
+    min-height: 130px;
 }
 
 :root {
@@ -9,7 +97,7 @@
 }
 
 .theme-dark {
-    --custom-theme-base-color: #201b35;
+    --custom-theme-base-color: var(--shine-base, #201b35);
     /* this is to basically trick every variable at once to follow styles becuase who's got time to style alldat */
     --custom-theme-base-color-amount: 100%;
     --custom-theme-text-color: color-mix(in oklab, var(--custom-theme-base-color), white 85%);
@@ -17,7 +105,7 @@
 }
 
 .theme-light {
-    --custom-theme-base-color: #d1caec;
+    --custom-theme-base-color: var(--shine-base, #d1caec);
     /* this is to basically trick every variable at once to follow styles becuase who's got time to style alldat */
     --custom-theme-base-color-amount: 100%;
     --custom-theme-text-color: color-mix(in oklab, var(--custom-theme-base-color), rgb(0, 0, 0) 85%);
@@ -27,7 +115,7 @@
 .panels_c48ade {
     left: var(--custom-guild-list-width);
     width: calc(100% - var(--custom-guild-list-width));
-    bottom: var(--shine-gap);
+    bottom: var(--shine-gap, 0px);
     border-radius: 0px;
     border: none;
     background: transparent;
@@ -68,7 +156,7 @@
 
 .sidebarList_c48ade {
     background: color-mix(in oklab, var(--background-surface-high), transparent 90%);
-    margin-bottom: var(--shine-gap) !important;
+    margin-bottom: var(--shine-gap, 0px) !important;
     border-radius: var(--shine-radius) 0px 0px var(--shine-radius);
     backdrop-filter: blur(35px) saturate(50%) brightness(122.5%);
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.32), 0 1.5px 2px 0 rgba(255, 255, 255, 0.10) inset, 0 2px 4px 0 rgba(0, 0, 0, 0.10);
@@ -76,7 +164,7 @@
 }
 
 .page_c48ade {
-    padding: 0px var(--shine-gap) var(--shine-gap) 0px;
+    padding: 0px var(--shine-gap, 0px) var(--shine-gap, 0px) 0px;
 
     >div {
         border-radius: 0px var(--shine-radius) var(--shine-radius) 0px;
@@ -105,7 +193,8 @@
 .container_c8ffbb,
 .member_c8ffbb,
 .wrapper_d852db,
-.wrapper_fc8177, .container_f369db {
+.wrapper_fc8177,
+.container_f369db {
     background: transparent;
 }
 
@@ -245,7 +334,7 @@
     background: transparent;
 
     .itemsContainer_ef3116>.stack_dbd263 {
-        padding: calc(var(--shine-gap) * 3) 0px;
+        padding: calc(var(--shine-gap, 4px) * 3) 0px;
     }
 }
 
@@ -263,7 +352,7 @@
     position: fixed;
     content: "";
     width: calc(var(--custom-guild-sidebar-width));
-    height: calc(100vh - var(--custom-app-top-bar-height) - var(--shine-gap));
+    height: calc(100vh - var(--custom-app-top-bar-height) - var(--shine-gap, 0px));
     left: var(--custom-guild-list-width);
     background: transparent;
     backdrop-filter: blur(25px) saturate(150%) brightness(125%);
@@ -281,7 +370,7 @@
     contain: none !important;
     z-index: 50;
     margin-left: 2px;
-    background: rgba(249, 248, 255, 0.02);
+    background: color-mix(in srgb, var(--custom-theme-text-color), transparent 97%);
     border-top-right-radius: var(--shine-radius);
 }
 
@@ -307,8 +396,8 @@
     position: fixed;
     width: 27px;
     height: 27px;
-    bottom: calc(var(--shine-gap) + 6px);
-    right: calc(var(--shine-gap) + 6px);
+    bottom: calc(var(--shine-gap, 0px) + 6px);
+    right: calc(var(--shine-gap, 0px) + 6px);
     background: url(https://blade04208.github.io/shine/src/grabber.svg) no-repeat center center;
     z-index: 9999999;
     -webkit-app-region: drag;
@@ -534,10 +623,7 @@ a.link__2ea32 {
     flex: 0;
     justify-self: center;
 
-    .barButtonMain__0f481 {
-        min-width: fit-content;
-        flex: 0;
-    }
+
 }
 
 .jumpToPresentBar__0f481 {
@@ -795,28 +881,28 @@ a.link__2ea32 {
 }
 
 div:has(>.headerRow_f369db) {
-    height: 160px!important;
+    height: 160px !important;
     margin-top: 30px;
 }
 
 [aria-labelledby="#forum-grid-header-section-1"] {
-    top: 184px!important;
+    top: 184px !important;
 }
 
 .info__2debe::after {
-  width: 100%;
-  display: block;
-  border-top: 1px solid var(--border-subtle);
-  padding-top: 8px;
-  margin-top: 8px;
-  content: "Shine \A Version 1 \A Made by Blade0 \A Design by Zeealeid \A ✨enjoy✨";
-  text-transform: none;
-  font-family: var(--font-primary);
-  font-size: 12px;
-  line-height: 1.4;
-  font-weight: 400;
-  color: var(--text-muted);
-  white-space: pre;
+    width: 100%;
+    display: block;
+    border-top: 1px solid var(--border-subtle);
+    padding-top: 8px;
+    margin-top: 8px;
+    content: "Shine \A Version 1 \A Made by Blade0 \A Design by Zeealeid \A ✨enjoy✨";
+    text-transform: none;
+    font-family: var(--font-primary);
+    font-size: 12px;
+    line-height: 1.4;
+    font-weight: 400;
+    color: var(--text-muted);
+    white-space: pre;
 }
 
 
