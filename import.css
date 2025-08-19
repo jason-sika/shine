@@ -44,11 +44,21 @@
         backdrop-filter: blur(18px);
         mask-image: linear-gradient(to bottom, transparent 0%, black 75%);
         border-bottom-left-radius: var(--shine-radius);
+        z-index: 0;
     }
 
     .container__37e49 {
         padding: 14px;
     }
+
+    .wrapper_e131a9 {
+        z-index: 10;
+    }
+
+}
+
+.panels_c48ade:has(.container_e131a9)::after {
+    mask-image: linear-gradient(to bottom, transparent 0%, black 50%);
 }
 
 .scroller__99e7c {
@@ -95,11 +105,12 @@
 .container_c8ffbb,
 .member_c8ffbb,
 .wrapper_d852db,
-.wrapper_fc8177 {
+.wrapper_fc8177, .container_f369db {
     background: transparent;
 }
 
-.container__9293f, .itemsContainer_ef3116 {
+.container__9293f,
+.itemsContainer_ef3116 {
     background: transparent !important;
 }
 
@@ -781,4 +792,35 @@ a.link__2ea32 {
 
 .withAccentColor__60fa3 {
     background: color-mix(in srgb, var(--background-surface-high), var(--__accent-color) 10%);
+}
+
+div:has(>.headerRow_f369db) {
+    height: 160px!important;
+    margin-top: 30px;
+}
+
+[aria-labelledby="#forum-grid-header-section-1"] {
+    top: 184px!important;
+}
+
+.info__2debe::after {
+  width: 100%;
+  display: block;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 8px;
+  margin-top: 8px;
+  content: "Shine \A Version 1 \A Made by Blade0 \A Design by Zeealeid \A ✨enjoy✨";
+  text-transform: none;
+  font-family: var(--font-primary);
+  font-size: 12px;
+  line-height: 1.4;
+  font-weight: 400;
+  color: var(--text-muted);
+  white-space: pre;
+}
+
+
+.user-profile-sidebar {
+    background: transparent;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
 }
